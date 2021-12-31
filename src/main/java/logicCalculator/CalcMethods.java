@@ -1,5 +1,8 @@
 package logicCalculator;
 
+import io.ConsolePrinter;
+import io.DataReader;
+
 public class CalcMethods {
 
     private static final String PLUS = "+";
@@ -8,29 +11,37 @@ public class CalcMethods {
     private static final String DIVIDE = "/";
     private static final String EXIT = "c";
 
+    ConsolePrinter printer = new ConsolePrinter();
+    DataReader dataReader = new DataReader(printer);
 
-    public double math(double a, double b, String operator) {
+    public double math(String operator) {
         double result = 0;
         do {
                 switch (operator) {
                     case PLUS:
-                        //add();
+                        printer.printLine("Napisz równanie:");
+                        double a = dataReader.getDouble();
+                        printer.printLine(" + ");
+                        double b = dataReader.getDouble();
+                        result = a + b;
+                        printer.printLine(a + " + " + b + " = " + result);
+                        operator = "c";
                         break;
                     case MINUS:
-                        //subtraction();
+                        //result = a - b;
                         break;
                     case MULTIPLY:
-                        //multiplication();
+                        //result = a * b;
                         break;
                     case DIVIDE:
-                        //division();
+                        //result = a / b;
                         break;
                     case EXIT:
                         break;
                     default:
                         System.out.println("Nie znaleziono takiej opcji");
                 }
-        } while (operator != EXIT) ;
+        } while (operator != EXIT);
         return result;
     }
 

@@ -21,6 +21,7 @@ public class ControlCalc{
 
         do {
             printOptions();
+            printer.printLine(memory + "");
             option = getOption();
             switch (option) {
                 case EXIT:
@@ -30,10 +31,9 @@ public class ControlCalc{
                     memory = 0;
                     break;
                 case ACTION:
-                    double a = 0;
-                    double b = 0;
-                    String op = "+";
-                    calcMethods.math(a, b, op);
+                    printer.printLine("Jakie działanie chesz wykonać? (+, -, *, /)");
+                    String op = dataReader.getString();
+                    memory = calcMethods.math(op);
                     break;
                 default:
                     printer.printLine("Nie znaleziono takiej opcji");

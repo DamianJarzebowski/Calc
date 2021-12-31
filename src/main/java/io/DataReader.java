@@ -27,14 +27,16 @@ public class DataReader {
         }
     }
 
+    public String getString() {
+        return scan.nextLine();
+    }
+
     public void close() {
         scan.close();
     }
 
     // Method for load String
 
-    public String getString() {
-        return scan.nextLine();
-    }
+
 }
 
