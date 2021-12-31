@@ -5,12 +5,6 @@ import io.DataReader;
 
 public class CalcMethods {
 
-    private static final String PLUS = "+";
-    private static final String MINUS = "-";
-    private static final String MULTIPLY = "*";
-    private static final String DIVIDE = "/";
-    private static final String EXIT = "c";
-
     ConsolePrinter printer = new ConsolePrinter();
     DataReader dataReader = new DataReader(printer);
     private double result;
