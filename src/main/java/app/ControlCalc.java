@@ -14,6 +14,7 @@ public class ControlCalc{
     CalcMethods calcMethods = new CalcMethods();
 
     private double memory = 0;
+    private double result = 0;
 
     void calcController() {
 
@@ -32,8 +33,9 @@ public class ControlCalc{
                     break;
                 case ACTION:
                     printer.printLine("Jakie działanie chesz wykonać? (+, -, *, /)");
-                    String op = dataReader.getString();
-                    memory = calcMethods.math(op);
+                    String operator = dataReader.getString();
+                    result = calcMethods.math(operator, memory);
+                    memory = result;
                     break;
                 default:
                     printer.printLine("Nie znaleziono takiej opcji");
