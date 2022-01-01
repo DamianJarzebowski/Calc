@@ -1,18 +1,35 @@
 package logicCalculator;
 
 import io.ConsolePrinter;
+import io.ConsolePrinterImpl;
 import io.DataReader;
+import io.DataReaderImpl;
 
 public class CalcMethods {
 
-    ConsolePrinter printer = new ConsolePrinter();
-    DataReader dataReader = new DataReader(printer);
+    private final ConsolePrinter printer;
+    private final DataReader dataReader;
 
-    public double math(String operator, double memory) {
-        return equation(operator, memory);
+    public CalcMethods() {
+        this(new ConsolePrinterImpl());
     }
 
-    double equation(String operator, double memory) {
+    public CalcMethods(ConsolePrinter printer) {
+        this (printer, new DataReaderImpl(printer));
+    }
+
+    public CalcMethods(ConsolePrinter consolePrinter, DataReader dataReader) {
+        this.dataReader = dataReader;
+        this.printer = consolePrinter;
+    }
+
+    private double memory = 0;
+
+    public double getMemory() {
+        return memory;
+    }
+
+    public void equation(String operator) {
         printer.printLine("Napisz równanie:");
         double a;
         if (memory == 0) {
@@ -26,7 +43,7 @@ public class CalcMethods {
         var b = dataReader.getDouble();
         var result = calculateTheAction(operator, a, b);
         printer.printLine(a + " " + operator + " " + b + " = " + result);
-        return result;
+        memory = result;
     }
 
     double calculateTheAction(String operator, double a, double b) {
@@ -64,6 +81,10 @@ public class CalcMethods {
             throw new ArithmeticException("Nie wolno dzielić przez 0");
             else
                 return a / b;
+    }
+
+    public void clear() {
+        memory = 0;
     }
 
 }

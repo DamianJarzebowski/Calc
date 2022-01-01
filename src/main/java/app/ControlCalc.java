@@ -1,5 +1,7 @@
 package app;
 
+import io.ConsolePrinterImpl;
+import io.DataReaderImpl;
 import logicCalculator.CalcMethods;
 import io.ConsolePrinter;
 import io.DataReader;
@@ -10,13 +12,12 @@ import java.util.InputMismatchException;
 
 public class ControlCalc{
 
-    ConsolePrinter printer = new ConsolePrinter();
-    DataReader dataReader = new DataReader(printer);
+    ConsolePrinter printer = new ConsolePrinterImpl();
+    DataReader dataReader = new DataReaderImpl(printer);
     CalcMethods calcMethods = new CalcMethods();
 
 
     boolean error = true;
-    private double memory = 0;
 
     void calcController() {
 
@@ -24,21 +25,21 @@ public class ControlCalc{
 
         do {
             printOptions();
-            printer.printLine(memory + "");
+            printer.printLine(calcMethods.getMemory() + "");
             option = getOption();
             switch (option) {
                 case EXIT:
                     printer.printLine("Zamykam program!");
                     break;
                 case CLEAR:
-                    memory = 0;
+                    calcMethods.clear();
                     break;
                 case ACTION:
                     printer.printLine("Jakie działanie chesz wykonać? (+, -, *, /)");
                     do {
                         String operator = dataReader.getString();
                         if (operator.equals("+") || operator.equals("-") || operator.equals("*") || operator.equals("/")) {
-                            memory = calcMethods.math(operator, memory);
+                            calcMethods.equation(operator);
                             error = false;
                         } else {
                             try {

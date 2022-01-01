@@ -2,15 +2,16 @@ package io;
 
 import java.util.Scanner;
 
-public class DataReader {
+public class DataReaderImpl implements DataReader {
 
     private final Scanner scan = new Scanner(System.in);
 
     // Konstruktor do wstrzyknięcia obiektu printer
 
-    public DataReader(ConsolePrinter printer) {
+    public DataReaderImpl(ConsolePrinter printer) {
     }
 
+    @Override
     public int getInt() {
         try {
             return scan.nextInt();
@@ -19,6 +20,7 @@ public class DataReader {
         }
     }
 
+    @Override
     public double getDouble() {
         try {
             return scan.nextDouble();
@@ -27,6 +29,7 @@ public class DataReader {
         }
     }
 
+    @Override
     public String getString() {
         return scan.nextLine();
     }
