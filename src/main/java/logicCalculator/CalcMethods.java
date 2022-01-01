@@ -7,10 +7,9 @@ public class CalcMethods {
 
     ConsolePrinter printer = new ConsolePrinter();
     DataReader dataReader = new DataReader(printer);
-    private double result;
 
     public double math(String operator, double memory) {
-        return result = equation(operator, memory);
+        return equation(operator, memory);
     }
 
     double equation(String operator, double memory) {
@@ -24,8 +23,8 @@ public class CalcMethods {
             printer.printLine(a + "");
         }
         printer.printLine(operator);
-        double b = dataReader.getDouble();
-        double result = calculateTheAction(operator, a, b);
+        var b = dataReader.getDouble();
+        var result = calculateTheAction(operator, a, b);
         printer.printLine(a + " " + operator + " " + b + " = " + result);
         return result;
     }
@@ -33,18 +32,38 @@ public class CalcMethods {
     double calculateTheAction(String operator, double a, double b) {
         double result = 0;
         if ("+".equals(operator)) {
-            result = a + b;
+            result = addition(a, b);
         }
         else if ("-".equals(operator)) {
-            result = a - b;
+            result = subtraction(a, b);
         }
         else if ("*".equals(operator)) {
-            result = a * b;
+            result = multiplication(a, b);
         }
         else if ("/".equals(operator)) {
-            result = a / b;
+            try {
+            result = division(a, b);
+            } catch (ArithmeticException e) {
+                System.err.println(e.getMessage());
+            }
         }
         return result;
+    }
+
+    double addition(double a, double b) {
+        return a + b;
+    }
+    double subtraction(double a, double b) {
+        return a - b;
+    }
+    double multiplication(double a, double b) {
+        return a * b;
+    }
+    double division(double a, double b) {
+        if (b == 0)
+            throw new ArithmeticException("Nie wolno dzielić przez 0");
+            else
+                return a / b;
     }
 
 }

@@ -4,6 +4,7 @@ import logicCalculator.CalcMethods;
 import io.ConsolePrinter;
 import io.DataReader;
 import wyjątki.NoSuchOptionException;
+import wyjątki.UnknownOperatorException;
 
 import java.util.InputMismatchException;
 
@@ -13,8 +14,9 @@ public class ControlCalc{
     DataReader dataReader = new DataReader(printer);
     CalcMethods calcMethods = new CalcMethods();
 
+
+    boolean error = true;
     private double memory = 0;
-    private double result = 0;
 
     void calcController() {
 
@@ -33,9 +35,20 @@ public class ControlCalc{
                     break;
                 case ACTION:
                     printer.printLine("Jakie działanie chesz wykonać? (+, -, *, /)");
-                    String operator = dataReader.getString();
-                    result = calcMethods.math(operator, memory);
-                    memory = result;
+                    do {
+                        String operator = dataReader.getString();
+                        if (operator.equals("+") || operator.equals("-") || operator.equals("*") || operator.equals("/")) {
+                            memory = calcMethods.math(operator, memory);
+                            error = false;
+                        } else {
+                            try {
+                                throw new UnknownOperatorException("Nie ma takiej opcji, wybierz ponownie");
+                            } catch (UnknownOperatorException e) {
+                                e.printStackTrace();
+                                System.err.println("Wybierz + lub - lub * lub /");
+                            }
+                        }
+                    } while (error);
                     break;
                 default:
                     printer.printLine("Nie znaleziono takiej opcji");
