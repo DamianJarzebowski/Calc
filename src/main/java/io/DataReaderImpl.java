@@ -6,11 +6,6 @@ public class DataReaderImpl implements DataReader {
 
     private final Scanner scan = new Scanner(System.in);
 
-    // Konstruktor do wstrzyknięcia obiektu printer
-
-    public DataReaderImpl(ConsolePrinter printer) {
-    }
-
     @Override
     public int getInt() {
         try {
@@ -37,9 +32,6 @@ public class DataReaderImpl implements DataReader {
     public void close() {
         scan.close();
     }
-
-    // Method for load String
-
 
 }
 

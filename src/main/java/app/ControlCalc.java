@@ -1,19 +1,18 @@
 package app;
 
+import io.ConsolePrinter;
 import io.ConsolePrinterImpl;
+import io.DataReader;
 import io.DataReaderImpl;
 import logicCalculator.CalcMethods;
-import io.ConsolePrinter;
-import io.DataReader;
 import wyjątki.NoSuchOptionException;
-import wyjątki.UnknownOperatorException;
 
 import java.util.InputMismatchException;
 
-public class ControlCalc{
+public class ControlCalc {
 
     ConsolePrinter printer = new ConsolePrinterImpl();
-    DataReader dataReader = new DataReaderImpl(printer);
+    DataReader dataReader = new DataReaderImpl();
     CalcMethods calcMethods = new CalcMethods();
 
 
@@ -25,7 +24,6 @@ public class ControlCalc{
 
         do {
             printOptions();
-            printer.printLine(calcMethods.getMemory() + "");
             option = getOption();
             switch (option) {
                 case EXIT:
@@ -38,16 +36,14 @@ public class ControlCalc{
                     printer.printLine("Jakie działanie chesz wykonać? (+, -, *, /)");
                     do {
                         String operator = dataReader.getString();
-                        if (operator.equals("+") || operator.equals("-") || operator.equals("*") || operator.equals("/")) {
-                            calcMethods.equation(operator);
+                        double a = dataReader.getDouble();
+                        if (calcMethods.isSuporttedOperator(operator)) {
+                            printer.printLine("Napisz równanie:");
+                            var actual = calcMethods.equation(operator, a);
+                            printer.printLine(actual + "");
                             error = false;
                         } else {
-                            try {
-                                throw new UnknownOperatorException("Nie ma takiej opcji, wybierz ponownie");
-                            } catch (UnknownOperatorException e) {
-                                e.printStackTrace();
-                                System.err.println("Wybierz + lub - lub * lub /");
-                            }
+                            System.err.println("Wybierz + lub - lub * lub /");
                         }
                     } while (error);
                     break;
@@ -63,6 +59,7 @@ public class ControlCalc{
             printer.printLine(option.toString());
         }
     }
+
     private Option getOption() {
         boolean optionOk = false;
         Option option = null;
