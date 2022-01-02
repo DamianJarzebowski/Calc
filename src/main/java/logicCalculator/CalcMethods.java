@@ -2,16 +2,14 @@ package logicCalculator;
 
 public class CalcMethods {
 
-    private double memory = 0;
-
+    public double memory;
 
     public double equation(String operator, double a) {
-        var result = calculateTheAction(operator, a);
-        memory = result;
-        return memory;
+        return memory = calculateTheAction(operator, a);
+
     }
 
-    double calculateTheAction(String operator, double a) {
+    public double calculateTheAction(String operator, double a) {
         double result = 0;
         if ("+".equals(operator)) {
             result = addition(a);
@@ -41,7 +39,7 @@ public class CalcMethods {
     double multiplication(double a) {
         return memory * a;
     }
-    double division(double a) {
+    public double division(double a) {
         if (a == 0)
             throw new ArithmeticException("Nie wolno dzielić przez 0");
             else

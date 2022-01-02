@@ -33,7 +33,7 @@ public class ControlCalc {
                     calcMethods.clear();
                     break;
                 case ACTION:
-                    printer.printLine("Jakie działanie chesz wykonać? (+, -, *, /)");
+                    printer.printLine("(+, -, *, /)");
                     do {
                         String operator = dataReader.getString();
                         double a = dataReader.getDouble();
