@@ -60,8 +60,11 @@ public class CalcMethodsTest {
     @Test
     public void shouldValidateAddOperator() {
         var sut = new CalcMethods();
-
         Assertions.assertThat(sut.isSuporttedOperator("+")).isTrue();
+        Assertions.assertThat(sut.isSuporttedOperator("-")).isTrue();
+        Assertions.assertThat(sut.isSuporttedOperator("*")).isTrue();
+        Assertions.assertThat(sut.isSuporttedOperator("/")).isTrue();
+
     }
 
 }
