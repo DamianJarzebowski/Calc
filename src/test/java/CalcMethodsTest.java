@@ -57,14 +57,4 @@ public class CalcMethodsTest {
         Assertions.assertThat(sut.memory).isEqualTo(0.0);
     }
 
-    @Test
-    public void shouldValidateAddOperator() {
-        var sut = new CalcMethods();
-        Assertions.assertThat(sut.isSuporttedOperator("+")).isTrue();
-        Assertions.assertThat(sut.isSuporttedOperator("-")).isTrue();
-        Assertions.assertThat(sut.isSuporttedOperator("*")).isTrue();
-        Assertions.assertThat(sut.isSuporttedOperator("/")).isTrue();
-
-    }
-
 }

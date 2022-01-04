@@ -5,11 +5,10 @@ public class CalcMethods {
     public double memory;
 
     public double equation(String operator, double a) {
-        return memory = calculateTheAction(operator, a);
-
+        return memory = chooseMathematicalOperation(operator, a);
     }
 
-    public double calculateTheAction(String operator, double a) {
+    public double chooseMathematicalOperation(String operator, double a) {
         double result = 0;
         if ("+".equals(operator)) {
             result = addition(a);
@@ -40,7 +39,7 @@ public class CalcMethods {
         return memory * a;
     }
     public double division(double a) {
-        if (a == 0)
+        if (a == 0 || memory == 0)
             throw new ArithmeticException("Nie wolno dzielić przez 0");
             else
                 return memory / a;
@@ -50,7 +49,4 @@ public class CalcMethods {
         memory = 0;
     }
 
-    public boolean isSuporttedOperator(String operator) {
-        return operator.equals("+") || operator.equals("-") || operator.equals("*") || operator.equals("/");
-    }
 }

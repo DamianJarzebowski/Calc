@@ -6,63 +6,42 @@ import io.DataReader;
 import io.DataReaderImpl;
 import logicCalculator.CalcMethods;
 
+import java.util.InputMismatchException;
+
 public class ControlCalc {
 
     ConsolePrinter printer = new ConsolePrinterImpl();
     DataReader dataReader = new DataReaderImpl();
     CalcMethods calcMethods = new CalcMethods();
 
-    boolean error = true;
-
     void calcController() {
 
-        Option option;
+        Option option = null;
 
         do {
             printOptions();
-            option = getOption();
             try {
-            switch (option) {
-                case EXIT:
-                    printer.printLine("Zamykam program!");
-                    break;
-                case CLEAR:
-                    calcMethods.clear();
-                    break;
-                case PLUS:
-                    printer.printLine("Zamykam +!");
-                    break;
-                case MINUS:
-                    printer.printLine("Zamykam -!");
-                    break;
-                case MULTIPLIER:
-                    printer.printLine("Zamykam *!");
-                    break;
-                case DIVIDER:
-                    printer.printLine("Zamykam /!");
-                    break;
-                case ACTION:
-                    printer.printLine("(+, -, *, /)");
-                    do {
-                        String operator = dataReader.getString();
-                        double a = dataReader.getDouble();
-                        if (calcMethods.isSuporttedOperator(operator)) {
-                            printer.printLine("Napisz równanie:");
-                            var actual = calcMethods.equation(operator, a);
-                            printer.printLine(actual + "");
-                            error = false;
-                        } else {
-                            System.err.println("Wybierz + lub - lub * lub /");
-                        }
-                    } while (error);
-            } } catch (NullPointerException e) {
+                double number = dataReader.getDouble();
+                option = getOption();
+                switch (option) {
+                    case EXIT -> printer.printLine("Zamykam program!");
+                    case CLEAR -> calcMethods.clear();
+                    case PLUS, MINUS, MULTIPLIER, DIVIDER -> count(number, option.toString());
+                }
+            } catch (NullPointerException e) {
                 System.err.println("Nie ma takiej opcji.");
+            } catch (InputMismatchException e) {
+                System.err.println("Podaj liczbę.");
             }
         } while (option != Option.EXIT);
     }
 
+    private void count(double number, String operator) {
+        var actual = calcMethods.equation(operator, number);
+            printer.printLine(actual + "");
+    }
+
     private void printOptions() {
-        printer.printLine("Wybierz opcję: ");
         for (Option option : Option.values()) {
             printer.printLine(option.toString());
         }
@@ -72,8 +51,8 @@ public class ControlCalc {
         boolean optionOk = false;
         Option option = null;
         while (!optionOk) {
-                option = Option.createOptionFromDescription(dataReader.getString());
-                optionOk = true;
+            option = Option.createOptionFromDescription(dataReader.getString());
+            optionOk = true;
         }
         return option;
     }
@@ -84,8 +63,7 @@ public class ControlCalc {
         PLUS("+"),
         MINUS("-"),
         MULTIPLIER("*"),
-        DIVIDER("/"),
-        ACTION("ACTION");
+        DIVIDER("/");
 
         private final String description;
 
@@ -98,13 +76,13 @@ public class ControlCalc {
             return description;
         }
 
-        static Option createOptionFromDescription(String options){
-                Option option = null;
-                for (int i = 0; i < Option.values().length; i++) {
-                    if (Option.values()[i].description.equals(options))
-                        option = Option.values()[i];
-                }
-                return option;
+        static Option createOptionFromDescription(String options) {
+            Option option = null;
+            for (int i = 0; i < Option.values().length; i++) {
+                if (Option.values()[i].description.equals(options))
+                    option = Option.values()[i];
+            }
+            return option;
         }
     }
 }
