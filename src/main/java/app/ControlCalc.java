@@ -21,13 +21,12 @@ public class ControlCalc {
         do {
             printOptions();
             try {
-                double number = dataReader.getDouble();
                 option = getOption();
-                switch (option) {
-                    case EXIT -> printer.printLine("Zamykam program!");
-                    case CLEAR -> calcMethods.clear();
-                    case PLUS, MINUS, MULTIPLIER, DIVIDER -> count(number, option.toString());
-                }
+                    switch (option) {
+                        case EXIT -> printer.printLine("Zamykam program!");
+                        case CLEAR -> calcMethods.clear();
+                        case PLUS, MINUS, MULTIPLIER, DIVIDER -> count(option.toString());
+                    }
             } catch (NullPointerException e) {
                 System.err.println("Nie ma takiej opcji.");
             } catch (InputMismatchException e) {
@@ -36,9 +35,10 @@ public class ControlCalc {
         } while (option != Option.EXIT);
     }
 
-    private void count(double number, String operator) {
+    private void count(String operator) {
+        double number = dataReader.getDouble();
         var actual = calcMethods.equation(operator, number);
-            printer.printLine(actual + "");
+        printer.printLine(actual + "");
     }
 
     private void printOptions() {

@@ -2,7 +2,7 @@ package logicCalculator;
 
 public class CalcMethods {
 
-    public double memory;
+    public static double memory;
 
     public double equation(String operator, double a) {
         return memory = chooseMathematicalOperation(operator, a);
