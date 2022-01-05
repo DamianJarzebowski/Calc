@@ -9,6 +9,7 @@ public class CalcMethodsTest {
     @Test
     public void shouldAdditionValues() {
         var sut = new CalcMethods();
+        sut.memory = 0;
         var actual = sut.equation("+", 5);
         Assertions.assertThat(actual).isEqualTo(5.0);
     }
@@ -16,6 +17,7 @@ public class CalcMethodsTest {
     @Test
     public void shouldSubtractionValues() {
         var sut = new CalcMethods();
+        sut.memory = 0;
         var actual = sut.equation("-", 5);
 
         Assertions.assertThat(actual).isEqualTo(-5.0);
