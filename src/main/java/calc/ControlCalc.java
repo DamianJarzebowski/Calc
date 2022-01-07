@@ -10,9 +10,18 @@ import java.util.InputMismatchException;
 
 public class ControlCalc {
 
-    ConsolePrinter printer = new ConsolePrinterImpl();
-    DataReader dataReader = new DataReaderImpl();
+    ConsolePrinter printer;
+    DataReader dataReader;
     CalcMethods calcMethods = new CalcMethods();
+
+    public ControlCalc(ConsolePrinter printer, DataReader dataReader) {
+        this.printer = printer;
+        this.dataReader = dataReader;
+    }
+
+    public ControlCalc() {
+        this(new ConsolePrinterImpl(), new DataReaderImpl());
+    }
 
     void calcController() {
 
@@ -38,7 +47,7 @@ public class ControlCalc {
     private void count(String operator) {
         try {
             double number = dataReader.getDouble();
-            var actual = calcMethods.equation(operator, number);
+            var actual = calcMethods.apply(operator, number);
             printer.printLine(actual + "");
         } catch (ArithmeticException e) {
             e.getMessage();
