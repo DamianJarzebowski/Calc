@@ -1,4 +1,4 @@
-package io;
+package calc.io;
 
 public class ConsolePrinterImpl implements ConsolePrinter {
 

@@ -1,4 +1,4 @@
-package wyjątki;
+package calc.exceptions;
 
 public class NoSuchOptionException extends Exception {
     public NoSuchOptionException(String message) {

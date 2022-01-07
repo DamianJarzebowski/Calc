@@ -1,7 +1,7 @@
-import logicCalculator.CalcMethods;
-import org.assertj.core.api.Assertions;
+import calc.logic.CalcMethods;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Fail.fail;
 
 public class CalcMethodsTest {
@@ -11,7 +11,7 @@ public class CalcMethodsTest {
         var sut = new CalcMethods();
         sut.memory = 0;
         var actual = sut.equation("+", 5);
-        Assertions.assertThat(actual).isEqualTo(5.0);
+        assertThat(actual).isEqualTo(5.0);
     }
 
     @Test
@@ -20,7 +20,7 @@ public class CalcMethodsTest {
         sut.memory = 0;
         var actual = sut.equation("-", 5);
 
-        Assertions.assertThat(actual).isEqualTo(-5.0);
+        assertThat(actual).isEqualTo(-5.0);
     }
 
     @Test
@@ -28,26 +28,26 @@ public class CalcMethodsTest {
         var sut = new CalcMethods();
         sut.memory = 2;
         var actual = sut.equation("*", 5);
-        Assertions.assertThat(actual).isEqualTo(10.0);
+        assertThat(actual).isEqualTo(10.0);
     }
 
     @Test
     public void shouldDivisionValues() {
-            var sut = new CalcMethods();
-            sut.memory = 5;
-                final var actual = sut.equation("/", 5);
-                Assertions.assertThat(actual).isEqualTo(1.0);
+        var sut = new CalcMethods();
+        sut.memory = 5;
+        final var actual = sut.equation("/", 5);
+        assertThat(actual).isEqualTo(1.0);
     }
 
     @Test
     public void shouldThrownArithmeticException() {
         try {
             var sut = new CalcMethods();
-            sut.division(0);
+            sut.equation("/", 0);
             fail("Wyjątek nie rzucony");
-        }catch (ArithmeticException e) {
-            var actual = "Nie wolno dzielić przez 0";
-            Assertions.assertThat(actual).isEqualTo(e.getMessage());
+        } catch (ArithmeticException e) {
+            var expected = "Nie wolno dzielić przez 0";
+            assertThat(e.getMessage()).isEqualTo(expected);
         }
     }
 
@@ -56,7 +56,15 @@ public class CalcMethodsTest {
         var sut = new CalcMethods();
         sut.memory = 5;
         sut.clear();
-        Assertions.assertThat(sut.memory).isEqualTo(0.0);
+        assertThat(sut.memory).isEqualTo(0.0);
+    }
+
+    @Test
+    public void shouldSeparateObject() {
+        var c1 = new CalcMethods();
+        var c2 = new CalcMethods();
+        c1.equation("+", 1);
+        assertThat(c2.equation("+", 1)).isEqualTo(1);
     }
 
 }

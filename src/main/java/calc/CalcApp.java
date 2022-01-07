@@ -1,7 +1,7 @@
-package app;
+package calc;
 
 
-import wyjątki.NoSuchOptionException;
+import calc.exceptions.NoSuchOptionException;
 
 public class CalcApp {
     public static void main(String[] args) throws NoSuchOptionException {

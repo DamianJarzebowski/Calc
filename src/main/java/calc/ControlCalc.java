@@ -1,10 +1,10 @@
-package app;
+package calc;
 
-import io.ConsolePrinter;
-import io.ConsolePrinterImpl;
-import io.DataReader;
-import io.DataReaderImpl;
-import logicCalculator.CalcMethods;
+import calc.io.ConsolePrinter;
+import calc.io.ConsolePrinterImpl;
+import calc.io.DataReader;
+import calc.io.DataReaderImpl;
+import calc.logic.CalcMethods;
 
 import java.util.InputMismatchException;
 
@@ -36,9 +36,13 @@ public class ControlCalc {
     }
 
     private void count(String operator) {
-        double number = dataReader.getDouble();
-        var actual = calcMethods.equation(operator, number);
-        printer.printLine(actual + "");
+        try {
+            double number = dataReader.getDouble();
+            var actual = calcMethods.equation(operator, number);
+            printer.printLine(actual + "");
+        } catch (ArithmeticException e) {
+            e.getMessage();
+        }
     }
 
     private void printOptions() {

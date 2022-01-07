@@ -1,4 +1,4 @@
-package wyjątki;
+package calc.exceptions;
 
 public class UnknownOperatorException extends Exception {
     public UnknownOperatorException(String message) {
