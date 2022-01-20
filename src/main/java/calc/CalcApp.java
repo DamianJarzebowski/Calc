@@ -10,7 +10,5 @@ public class CalcApp {
 
         appStart.calcController();
 
-        //
-
     }
 }
