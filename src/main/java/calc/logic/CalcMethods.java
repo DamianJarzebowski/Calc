@@ -10,7 +10,7 @@ public class CalcMethods {
      * @param operator: +, -, *, /.
      * @param value     the value.
      * @return result of the operation.
-     * @throws ArithmeticException when value is 0
+     * @throws ArithmeticException      when value is 0
      * @throws IllegalArgumentException when operator is invalid
      */
     public double apply(String operator, double value) {

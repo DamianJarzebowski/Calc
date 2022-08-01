@@ -7,14 +7,14 @@ import static org.assertj.core.api.Fail.fail;
 public class CalcMethodsTest {
 
     @Test
-    public void shouldAdditionValues() {
+    void shouldAdditionValues() {
         var sut = new CalcMethods();
         var actual = sut.apply("+", 5);
         assertThat(actual).isEqualTo(5.0);
     }
 
     @Test
-    public void shouldSubtractionValues() {
+    void shouldSubtractionValues() {
         var sut = new CalcMethods();
         var actual = sut.apply("-", 5);
 
@@ -22,7 +22,7 @@ public class CalcMethodsTest {
     }
 
     @Test
-    public void shouldMultiplicationValues() {
+    void shouldMultiplicationValues() {
         var sut = new CalcMethods();
         sut.apply("+", 2);
         var actual = sut.apply("*", 5);
@@ -30,7 +30,7 @@ public class CalcMethodsTest {
     }
 
     @Test
-    public void shouldDivisionValues() {
+    void shouldDivisionValues() {
         var sut = new CalcMethods();
         sut.apply("+", 5);
         final var actual = sut.apply("/", 5);
@@ -38,7 +38,7 @@ public class CalcMethodsTest {
     }
 
     @Test
-    public void shouldThrownArithmeticException() {
+    void shouldThrownArithmeticException() {
         try {
             var sut = new CalcMethods();
             sut.apply("/", 0);
@@ -50,7 +50,7 @@ public class CalcMethodsTest {
     }
 
     @Test
-    public void shouldClearMemory() {
+    void shouldClearMemory() {
         var sut = new CalcMethods();
         sut.apply("+", 1);
         sut.clear();
@@ -59,7 +59,7 @@ public class CalcMethodsTest {
     }
 
     @Test
-    public void shouldSeparateObject() {
+    void shouldSeparateObject() {
         var c1 = new CalcMethods();
         var c2 = new CalcMethods();
         c1.apply("+", 1);
@@ -67,7 +67,7 @@ public class CalcMethodsTest {
     }
 
     @Test
-    public void shouldRejectIllegalOperator() {
+    void shouldRejectIllegalOperator() {
         assertThatThrownBy(() -> {
             var sut = new CalcMethods();
             sut.apply("Illegal", 0);

@@ -31,11 +31,11 @@ public class ControlCalc {
             printOptions();
             try {
                 option = getOption();
-                    switch (option) {
-                        case EXIT -> printer.printLine("Zamykam program!");
-                        case CLEAR -> calcMethods.clear();
-                        case PLUS, MINUS, MULTIPLIER, DIVIDER -> count(option.toString());
-                    }
+                switch (option) {
+                    case EXIT -> printer.printLine("Zamykam program!");
+                    case CLEAR -> calcMethods.clear();
+                    case PLUS, MINUS, MULTIPLIER, DIVIDER -> count(option.toString());
+                }
             } catch (NullPointerException e) {
                 System.err.println("Nie ma takiej opcji.");
             } catch (InputMismatchException e) {
